@@ -1,6 +1,9 @@
 import argparse
-
 from . import *
+from abcli import logging
+import logging
+
+logger = logging.getLogger(__name__)
 
 parser = argparse.ArgumentParser(name, description="{}-{:.2f}".format(name, version))
 parser.add_argument("task", type=str, help="TBD")
@@ -10,7 +13,7 @@ success = False
 if args.task == "TBD":
     success = True
 else:
-    print(f'error! unknown task: {name} "{args.task}".')
+    logger.error(f"-{name}: {args.task}: command not found.")
 
 if not success:
-    print(f"error! {name}.{args.task} failed.")
+    logger.error(f"-{name}: {args.task}: failed.")

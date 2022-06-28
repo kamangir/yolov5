@@ -1,11 +1,11 @@
 from setuptools import setup
 
-from yolov5 import name, version
+from yolov5 import *
 
 setup(
     name=name,
     author="kamangir",
-    version=str(version),
-    description=name,
+    version=version,
+    description=description,
     packages=[name],
 )
