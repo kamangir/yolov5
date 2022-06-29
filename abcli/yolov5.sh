@@ -26,5 +26,5 @@ function yolov5() {
         return
     fi
 
-    abcli_log_error "unknown task: yolov5 '$task'."
+    abcli_log_error "-yolov5: $task: command not found."
 }
