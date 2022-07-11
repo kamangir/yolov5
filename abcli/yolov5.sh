@@ -4,8 +4,8 @@ function yolov5() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ $task == "help" ] ; then
-        abcli_help_line "yolov5 terraform" \
-            "terraform yolov5."
+        abcli_help_line "yolov5 install" \
+            "install yolov5."
         abcli_help_line "yolov5 validate" \
             "validate yolov5."
 
@@ -16,8 +16,8 @@ function yolov5() {
         return
     fi
 
-    if [ "$task" == "terraform" ] ; then
-        abcli_git terraform yolov5
+    if [ "$task" == "install" ] ; then
+        abcli_git install yolov5
         return
     fi
 
