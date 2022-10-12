@@ -1,5 +1,3 @@
-name = "yolov5"
+NAME = "yolov5"
 
-version = "1.1.17"
-
-description = ""
+VERSION = "2.1.1"
