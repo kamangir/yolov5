@@ -4,7 +4,7 @@ function yolov5() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ $task == "help" ] ; then
-        abcli_help_line "yolov5 task_1" \
+        abcli_show_usage "yolov5 task_1" \
             "yolov5 task_1."
 
         if [ "$(abcli_keyword_is $2 verbose)" == true ] ; then
