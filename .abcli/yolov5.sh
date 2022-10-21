@@ -4,8 +4,13 @@ function yolov5() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ $task == "help" ] ; then
+        yolov5_dataset $@
+        yolov5_detect $@
+
         abcli_show_usage "yolov5 sync_fork" \
             "sync yolov5 w/ upstream."
+
+        yolov5_train $@
 
         if [ "$(abcli_keyword_is $2 verbose)" == true ] ; then
             python3 -m yolov5 --help
@@ -19,7 +24,6 @@ function yolov5() {
             sync_fork \
             yolov5 \
             master
-
         return
     fi
 
