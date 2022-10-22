@@ -20,8 +20,7 @@ function yolov5() {
     fi
 
     if [ "$task" == "sync_fork" ] ; then
-        abcli_git \
-            sync_fork \
+        abcli_git sync_fork \
             yolov5 \
             master
         return
