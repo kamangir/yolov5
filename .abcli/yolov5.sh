@@ -19,6 +19,12 @@ function yolov5() {
         return
     fi
 
+    local function_name="yolov5_$task"
+    if [[ $(type -t $function_name) == "function" ]] ; then
+        $function_name ${@:2}
+        return
+    fi
+
     if [ "$task" == "sync_fork" ] ; then
         abcli_git sync_fork \
             yolov5 \
