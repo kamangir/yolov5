@@ -22,7 +22,6 @@ function yolov5_ingest() {
             $abcli_path_git/yolov5/data/coco128.yaml \
             ./dataset.yaml
 
-
         python3 -m yolov5.dataset \
             replace_in_yaml \
             --filename $abcli_object_path/dataset.yaml \
