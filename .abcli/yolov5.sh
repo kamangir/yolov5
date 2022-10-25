@@ -6,6 +6,7 @@ function yolov5() {
     if [ $task == "help" ] ; then
         yolov5_dataset $@
         yolov5_detect $@
+        yolov5_ingest $@
 
         abcli_show_usage "yolov5 sync_fork" \
             "sync yolov5 w/ upstream."
