@@ -23,9 +23,8 @@ function yolov5_ingest() {
             ./dataset.yaml
 
         python3 -m yolov5.dataset \
-            update_path \
-            --filename $abcli_object_path/dataset.yaml \
-            --path ./
+            adjust \
+            --filename $abcli_object_path/dataset.yaml
 
         abcli_tag set \
             $abcli_object_name \
