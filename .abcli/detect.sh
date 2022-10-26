@@ -23,7 +23,7 @@ function yolov5_detect() {
         local model_object_name=$(abcli_clarify_object "$1" $(abcli_string_timestamp))
         abcli_download object $model_object_name
 
-        local weights="$abcli_path_storage/$model_object_name/model/weights/best.pt"
+        local weights="$abcli_object_root/$model_object_name/model/weights/best.pt"
     fi
 
     abcli_tag set $abcli_object_name yolov5_detection
