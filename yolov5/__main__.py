@@ -12,64 +12,13 @@ parser.add_argument(
     "task",
     type=str,
     default="",
-    help="adjust_yaml|crop_dataset|split_dataset|update_path",
-)
-parser.add_argument(
-    "--class_names",
-    type=str,
-    default="",
-)
-parser.add_argument(
-    "--filename",
-    type=str,
-    default="",
-)
-parser.add_argument(
-    "--image_extension",
-    type=str,
-    default="*",
-)
-parser.add_argument(
-    "--path",
-    type=str,
-    default="",
-)
-parser.add_argument(
-    "--val_size",
-    type=float,
-    default=0.2,
-)
-parser.add_argument(
-    "--verbose",
-    type=int,
-    default=0,
-    help="0|1",
+    help="TBA",
 )
 args = parser.parse_args()
 
 success = False
-if args.task == "adjust_yaml":
-    success = adjust_yaml(
-        args.filename,
-    )
-elif args.task == "crop_dataset":
-    success = crop_dataset(
-        args.path,
-        args.class_names,
-    )
-elif args.task == "split_dataset":
-    success = split_dataset(
-        args.path,
-        val_size=args.val_size,
-        image_extension=args.image_extension,
-        verbose=args.verbose,
-    )
-elif args.task == "update_path":
-    success, content = file.load_yaml(args.filename)
-    if success:
-        content["path"] = args.path
-
-        success = file.save_yaml(args.filename, content)
+if args.task == "TBA":
+    success = True
 else:
     logger.error(f"-{NAME}: {args.task}: command not found.")
 
