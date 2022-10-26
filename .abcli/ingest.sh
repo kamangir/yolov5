@@ -10,7 +10,7 @@ function yolov5_ingest() {
     fi
 
     if [ "$source" == "coco128" ] ; then
-        abcli_log "ingest($source)"
+        abcli_log "yolov5.ingest($source)"
 
         kaggle datasets download -d ultralytics/coco128
         unzip coco128
@@ -22,11 +22,10 @@ function yolov5_ingest() {
             $abcli_path_git/yolov5/data/coco128.yaml \
             ./dataset.yaml
 
-        python3 -m yolov5.dataset \
-            replace_in_yaml \
+        echo python3 -m yolov5.dataset \
+            update_path \
             --filename $abcli_object_path/dataset.yaml \
-            --this ../datasets/coco128 \
-            --that $abcli_object_path
+            --path ./
 
         abcli_tag set \
             $abcli_object_name \

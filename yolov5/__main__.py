@@ -1,6 +1,7 @@
 import argparse
 from abcli import file
 from . import *
+from .dataset import *
 from abcli import logging
 import logging
 
@@ -11,7 +12,7 @@ parser.add_argument(
     "task",
     type=str,
     default="",
-    help="adjust_yaml|crop_dataset|replace_in_yaml|split_dataset",
+    help="adjust_yaml|crop_dataset|split_dataset|update_path",
 )
 parser.add_argument(
     "--class_names",
@@ -39,16 +40,6 @@ parser.add_argument(
     default=0.2,
 )
 parser.add_argument(
-    "--that",
-    type=str,
-    default="",
-)
-parser.add_argument(
-    "--this",
-    type=str,
-    default="",
-)
-parser.add_argument(
     "--verbose",
     type=int,
     default=0,
@@ -66,16 +57,6 @@ elif args.task == "crop_dataset":
         args.path,
         args.class_names,
     )
-elif args.task == "replace_in_yaml":
-    success, content = file.load_text(args.filename)
-    if success:
-        content = [thing.replace(args.this, args.that) for thing in content]
-
-        success = file.save_text(
-            args.filename,
-            content,
-        )
-
 elif args.task == "split_dataset":
     success = split_dataset(
         args.path,
@@ -83,6 +64,12 @@ elif args.task == "split_dataset":
         image_extension=args.image_extension,
         verbose=args.verbose,
     )
+elif args.task == "update_path":
+    success, content = file.load_yaml(args.filename)
+    if success:
+        content["path"] = args.path
+
+        success = file.save_yaml(args.filename, content)
 else:
     logger.error(f"-{NAME}: {args.task}: command not found.")
 
