@@ -57,7 +57,7 @@ function yolov5_train() {
         --img 640 \
         --batch 16 \
         --epochs $epochs \
-        --data $abcli_path_storage/$dataset_name/dataset.yaml \
+        --data $abcli_object_root/$dataset_name/dataset.yaml \
         --weights $size.pt \
         --project $abcli_object_path \
         --name model
