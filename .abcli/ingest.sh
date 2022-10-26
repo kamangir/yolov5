@@ -22,7 +22,7 @@ function yolov5_ingest() {
             $abcli_path_git/yolov5/data/coco128.yaml \
             ./dataset.yaml
 
-        echo python3 -m yolov5.dataset \
+        python3 -m yolov5.dataset \
             update_path \
             --filename $abcli_object_path/dataset.yaml \
             --path ./
