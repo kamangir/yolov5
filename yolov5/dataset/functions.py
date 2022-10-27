@@ -27,8 +27,7 @@ def adjust_dataset(filename):
     if not success:
         return success
 
-    dataset_yaml["path"] = file.path(filename)
-    dataset_yaml["val"] = "images/val"
+    dataset_yaml["path"] = "./"
 
     dataset_yaml["classes"] = dataset_yaml["names"]
     del dataset_yaml["names"]
