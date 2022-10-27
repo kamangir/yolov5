@@ -29,8 +29,9 @@ def adjust_dataset(filename):
 
     dataset_yaml["path"] = "./"
 
-    dataset_yaml["classes"] = dataset_yaml["names"]
-    del dataset_yaml["names"]
+    dataset_yaml["names"] = [
+        dataset_yaml["names"][id] for id in range(len(dataset_yaml["names"]))
+    ]
 
     return file.save_yaml(filename, dataset_yaml)
 
