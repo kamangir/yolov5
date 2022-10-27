@@ -13,7 +13,7 @@ function yolov5_ingest() {
         abcli_log "yolov5.ingest($source)"
 
         kaggle datasets download -d ultralytics/coco128
-        unzip coco128
+        unzip -q coco128
         rm coco128.zip
         mv -v -f coco128/* ./
         rm -rf coco128
