@@ -53,7 +53,7 @@ function yolov5_train() {
     fi
 
     # https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
-    local command_line=python \
+    local command_line="python \
         $parallel_prefix \
         train.py \
         --img 640 \
@@ -62,13 +62,13 @@ function yolov5_train() {
         --data $abcli_object_root/$dataset_name/dataset.yaml \
         --weights $size.pt \
         --project $abcli_object_path \
-        --name model
+        --name model"
 
     if [ "$dryrun" == 0 ] ; then
-        abcli_log $command_line
-    else
         pushd $abcli_path_git/yolov5 > /dev/null
         eval $command_line
         popd > /dev/null
+    else
+        abcli_log $command_line
     fi
 }
