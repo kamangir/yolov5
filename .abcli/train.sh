@@ -18,7 +18,7 @@ function yolov5_train() {
     local is_validate=false
     if [ "$task" == "validate" ] ; then
         abcli_select
-        abcli_ingest coco128
+        yolov5_ingest coco128
         local dataset_name=$abcli_object_name
 
         abcli_select

@@ -15,7 +15,7 @@ function yolov5_detect() {
 
     if [ "$task" == "validate" ] ; then
         abcli_select
-        abcli_ingest coco128
+        yolov5_ingest coco128
 
         local weights="yolov5s.pt"
         local postfix="images/train2017"
