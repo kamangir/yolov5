@@ -4,7 +4,7 @@ function yolov5_train() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ "$task" == "help" ] ; then
-        abcli_show_usage "yolov5 train$ABCUL<object-name>|coco128$ABCUL[epochs=10,gpu_count=2,size=yolov5s]" \
+        abcli_show_usage "yolov5 train$ABCUL<object-name>|coco128$ABCUL[dryrun,epochs=10,gpu_count=2,size=yolov5s]" \
             "train yolov5 on <object-name>|coco128."
 
         abcli_log_list "$YOLOV5_MODEL_SIZES" space "size(s)"
@@ -29,6 +29,7 @@ function yolov5_train() {
         abcli_download object $dataset_name
     fi
 
+    local dryrun=$(abcli_option_int "$options" dryrun 0)
     local epochs=$(abcli_option_int "$options" epochs 25)
     local gpu_count=$(abcli_option "$options" gpu_count -)
     local size=$(abcli_option "$options" size yolov5s)
@@ -51,9 +52,8 @@ function yolov5_train() {
         local parallel_prefix="-m torch.distributed.run --nproc_per_node $gpu_count"
     fi
 
-    pushd $abcli_path_git/yolov5 > /dev/null
     # https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
-    python \
+    local command_line=python \
         $parallel_prefix \
         train.py \
         --img 640 \
@@ -63,5 +63,12 @@ function yolov5_train() {
         --weights $size.pt \
         --project $abcli_object_path \
         --name model
-    popd > /dev/null
+
+    if [ "$dryrun" == 0 ] ; then
+        abcli_log $command_line
+    else
+        pushd $abcli_path_git/yolov5 > /dev/null
+        eval $command_line
+        popd > /dev/null
+    fi
 }
