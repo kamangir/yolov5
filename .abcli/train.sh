@@ -4,10 +4,8 @@ function yolov5_train() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ "$task" == "help" ] ; then
-        abcli_show_usage "yolov5 train$ABCUL<object-name>$ABCUL[epochs=10,gpu_count=2,size=yolov5s]" \
-            "train yolov5 on <object-name>."
-        abcli_show_usage "yolov5 train${ABCUL}coco128" \
-            "train yolov5 on coco128."
+        abcli_show_usage "yolov5 train$ABCUL<object-name>|coco128$ABCUL[epochs=10,gpu_count=2,size=yolov5s]" \
+            "train yolov5 on <object-name>|coco128."
 
         abcli_log_list "$YOLOV5_MODEL_SIZES" space "size(s)"
         return
