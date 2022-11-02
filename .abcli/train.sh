@@ -6,27 +6,28 @@ function yolov5_train() {
     if [ "$task" == "help" ] ; then
         abcli_show_usage "yolov5 train$ABCUL<object-name>$ABCUL[epochs=10,gpu_count=2,size=yolov5s]" \
             "train yolov5 on <object-name>."
-        abcli_show_usage "yolov5 train${ABCUL}validate" \
-            "validate yolov5 train."
+        abcli_show_usage "yolov5 train${ABCUL}coco128" \
+            "train yolov5 on coco128."
 
         abcli_log_list "$YOLOV5_MODEL_SIZES" space "size(s)"
         return
     fi
 
+    local dataset_name=$(abcli_clarify_object $1)
+
     local options=$2
 
-    local is_validate=false
-    if [ "$task" == "validate" ] ; then
-        abcli_select
+    if [ "$dataset_name" == "coco128" ] ; then
+        local current_object=$abcli_object_name
+
+        abcli_select - ~trail
         yolov5_ingest coco128
         local dataset_name=$abcli_object_name
 
-        abcli_select
+        abcli_select $current_object ~trail
 
-        local is_validate=true
         local options=$(abcli_option_default "$options" epochs 3)
     else
-        local dataset_name=$(abcli_clarify_object $1)
         abcli_download object $dataset_name
     fi
 
@@ -34,11 +35,14 @@ function yolov5_train() {
     local gpu_count=$(abcli_option "$options" gpu_count -)
     local size=$(abcli_option "$options" size yolov5s)
 
-    abcli_cache write $abcli_object_name.type model
-    abcli_cache write $abcli_object_name.model_type Yolov5
-    abcli_cache write $abcli_object_name.size $size
-    abcli_cache write $abcli_object_name.epochs $epochs
-    abcli_cache write $abcli_object_name.validation=$is_validate
+    abcli_cache write \
+        $abcli_object_name.type model
+    abcli_cache write \
+        $abcli_object_name.model_type Yolov5
+    abcli_cache write \
+        $abcli_object_name.size $size
+    abcli_cache write \
+        $abcli_object_name.epochs $epochs
 
     abcli_relation set $abcli_object_name $dataset_name trained-on
 
