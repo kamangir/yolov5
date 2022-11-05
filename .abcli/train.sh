@@ -58,6 +58,7 @@ function yolov5_train() {
     fi
 
     # https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
+    # https://github.com/pytorch/pytorch/issues/8976
     local command_line="python \
         $parallel_prefix \
         train.py \
@@ -67,6 +68,7 @@ function yolov5_train() {
         --data $abcli_object_root/$dataset_name/dataset.yaml \
         --weights $size.pt \
         --project $abcli_object_path \
+        --workers 0 \
         --name model"
 
     if [ "$dryrun" == 0 ] ; then
