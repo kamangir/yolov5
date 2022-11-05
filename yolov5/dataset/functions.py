@@ -27,7 +27,7 @@ def adjust_dataset(filename):
     if not success:
         return success
 
-    dataset_yaml["path"] = "./"
+    dataset_yaml["path"] = os.getenv("abcli_object_path", "./")
 
     dataset_yaml["names"] = [
         dataset_yaml["names"][id] for id in range(len(dataset_yaml["names"]))
