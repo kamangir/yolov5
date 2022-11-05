@@ -13,6 +13,9 @@ function yolov5() {
 
         yolov5_train $@
 
+        abcli_show_usage "yolov5 version" \
+            "show version."
+
         if [ "$(abcli_keyword_is $2 verbose)" == true ] ; then
             python3 -m yolov5 --help
         fi
@@ -30,6 +33,11 @@ function yolov5() {
         abcli_git sync_fork \
             yolov5 \
             master
+        return
+    fi
+
+    if [ "$task" == "version" ] ; then
+        python3 -m yolov5 show_version
         return
     fi
 

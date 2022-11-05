@@ -1,7 +1,6 @@
 import argparse
 from abcli import file
 from . import *
-from .dataset import *
 from abcli import logging
 import logging
 
@@ -12,13 +11,14 @@ parser.add_argument(
     "task",
     type=str,
     default="",
-    help="TBA",
+    help="show_version",
 )
 args = parser.parse_args()
 
 success = False
-if args.task == "TBA":
+if args.task == "show_version":
     success = True
+    print(f"{NAME}-{VERSION}")
 else:
     logger.error(f"-{NAME}: {args.task}: command not found.")
 
