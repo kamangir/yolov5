@@ -8,6 +8,13 @@ function yolov5_train() {
             "train yolov5 on <object-name>|coco128."
 
         abcli_log_list "$YOLOV5_MODEL_SIZES" space "size(s)"
+
+        if [ "$(abcli_keyword_is $2 verbose)" == true ] ; then
+            pushd $abcli_path_git/yolov5 > /dev/null
+            python3 train.py --help
+            popd > /dev/null
+        fi
+
         return
     fi
 
