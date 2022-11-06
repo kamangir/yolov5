@@ -68,7 +68,7 @@ function yolov5_train() {
     local command_line="python \
         $parallel_prefix \
         train.py \
-        --img 80 \
+        --img 640 \
         --batch 3 \
         --epochs $epochs \
         --data $abcli_object_root/$dataset_name/dataset.yaml \
