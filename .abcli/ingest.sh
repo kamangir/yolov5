@@ -38,7 +38,7 @@ function yolov5_ingest() {
                 $abcli_object_name \
                 dataset,coco128
 
-            abcli_upload
+            abcli_upload ~open,solid
 
             abcli_cache write \
                 coco128.dataset $abcli_object_name
