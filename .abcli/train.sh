@@ -43,7 +43,7 @@ function yolov5_train() {
     local dryrun=$(abcli_option_int "$options" dryrun 0)
     local epochs=$(abcli_option_int "$options" epochs 25)
     local gpu_count=$(abcli_option "$options" gpu_count -)
-    local size=$(abcli_option "$options" size yolov5s)
+    local size=$(abcli_option "$options" size yolov5n)
 
     abcli_cache write \
         $abcli_object_name.type model
