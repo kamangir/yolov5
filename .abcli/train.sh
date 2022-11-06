@@ -62,14 +62,15 @@ function yolov5_train() {
     local command_line="python \
         $parallel_prefix \
         train.py \
-        --img 640 \
+        --img 80 \
         --batch 16 \
         --epochs $epochs \
         --data $abcli_object_root/$dataset_name/dataset.yaml \
         --weights $size.pt \
         --project $abcli_object_path \
         --workers 0 \
-        --name model"
+        --name model \
+        --device cpu"
 
     if [ "$dryrun" == 0 ] ; then
         pushd $abcli_path_git/yolov5 > /dev/null
