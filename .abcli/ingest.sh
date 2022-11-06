@@ -26,18 +26,6 @@ function yolov5_ingest() {
             mv -v -f coco128/* ./
             rm -rf coco128
 
-            cp -v \
-                $abcli_path_git/yolov5/data/coco128.yaml \
-                ./dataset.yaml
-
-            python3 -m yolov5.dataset \
-                adjust \
-                --filename $abcli_object_path/dataset.yaml
-
-            abcli_tag set \
-                $abcli_object_name \
-                dataset,coco128
-
             abcli_upload ~open,solid
 
             abcli_cache write \
@@ -49,6 +37,16 @@ function yolov5_ingest() {
             ~trail
 
         abcli_clone $current_object
+
+        local yaml_filename=$abcli_object_path/dataset.yaml
+
+        cp -v \
+            $abcli_path_git/yolov5/data/coco128.yaml \
+            $yaml_filename
+
+        python3 -m yolov5.dataset \
+            adjust \
+            --filename $yaml_filename
 
         return
     fi
