@@ -4,7 +4,7 @@ function yolov5_train() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ "$task" == "help" ] ; then
-        abcli_show_usage "yolov5 train$ABCUL<object-name>|coco128$ABCUL[classes=<class-1+class-2>,dryrun,epochs=10,gpu_count=2,size=$YOLOV5_MODEL_SIZES]" \
+        abcli_show_usage "yolov5 train$ABCUL<object-name>|coco128$ABCUL[classes=<class-1+class-2>,dryrun,epochs=10,gpu_count=2,size=$YOLOV5_MODEL_SIZES,~upload]" \
             "train yolov5."
 
         if [ "$(abcli_keyword_is $2 verbose)" == true ] ; then
@@ -40,6 +40,7 @@ function yolov5_train() {
         abcli_download object $dataset_name
     fi
 
+    local do_upload=$(abcli_option_int "$options" upload 1)
     local dryrun=$(abcli_option_int "$options" dryrun 0)
     local epochs=$(abcli_option_int "$options" epochs 25)
     local gpu_count=$(abcli_option "$options" gpu_count -)
@@ -84,5 +85,9 @@ function yolov5_train() {
         pushd $abcli_path_git/yolov5 > /dev/null
         eval $command_line
         popd > /dev/null
+
+        if [ "$do_upload" == 1 ] ; then
+            abcli_upload
+        fi
     fi
 }
