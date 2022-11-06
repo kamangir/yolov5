@@ -27,7 +27,7 @@ function yolov5_train() {
         yolov5_ingest coco128
         local dataset_name=$abcli_object_name
 
-        local classes=$(abcli_option "$optins" classes)
+        local classes=$(abcli_option "$options" classes)
         if [ ! -z "$classes" ] ; then
             yolov5_dataset crop \
                 $(echo "$classes" | tr + ,)
