@@ -49,13 +49,19 @@ function yolov5_train() {
     abcli_cache write \
         $abcli_object_name.type model
     abcli_cache write \
-        $abcli_object_name.model_type Yolov5
+        $abcli_object_name.model_type yolov5
     abcli_cache write \
         $abcli_object_name.size $size
     abcli_cache write \
         $abcli_object_name.epochs $epochs
 
-    abcli_relation set $abcli_object_name $dataset_name trained-on
+    abcli_relation set \
+        $abcli_object_name $dataset_name \
+        trained-on
+
+    abcli_tag set \
+        $abcli_object_name \
+        model,yolov5
 
     abcli_log "yolov5.train($dataset_name) -$size x $epochs epoch(s) on $gpu_count gpu(s)-> $abcli_object_name"
 
