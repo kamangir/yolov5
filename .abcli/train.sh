@@ -66,7 +66,7 @@ function yolov5_train() {
 
     # https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data
     # https://github.com/pytorch/pytorch/issues/8976
-    local command_line="python \
+    local command_line="python3 \
         $parallel_prefix \
         train.py \
         --img 640 \
