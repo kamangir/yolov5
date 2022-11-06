@@ -1,3 +1,3 @@
 NAME = "yolov5"
 
-VERSION = "3.52.1"
+VERSION = "3.53.1"
