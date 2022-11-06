@@ -72,7 +72,7 @@ function yolov5_train() {
         --name model \
         --device cpu"
 
-    abcli_log $command_line
+    abcli_log "⚙️  $command_line"
 
     if [ "$dryrun" == 0 ] ; then
         pushd $abcli_path_git/yolov5 > /dev/null
