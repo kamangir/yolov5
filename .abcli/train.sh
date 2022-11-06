@@ -63,7 +63,7 @@ function yolov5_train() {
         $parallel_prefix \
         train.py \
         --img 80 \
-        --batch 16 \
+        --batch 3 \
         --epochs $epochs \
         --data $abcli_object_root/$dataset_name/dataset.yaml \
         --weights $size.pt \
