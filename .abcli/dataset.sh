@@ -4,8 +4,8 @@ function yolov5_dataset() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ "$task" == "help" ] ; then
-        abcli_show_usage "yolov5 dataset crop$ABCUL<class_1,class_2>" \
-            "crop $abcli_object_name to <class_1,class_2>."
+        abcli_show_usage "yolov5 dataset crop$ABCUL<class-1,class-2>" \
+            "crop $abcli_object_name to <class-1,class-2>."
         abcli_show_usage "yolov5 dataset split" \
             "split $abcli_object_name."
         return

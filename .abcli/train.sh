@@ -4,8 +4,8 @@ function yolov5_train() {
     local task=$(abcli_unpack_keyword $1 help)
 
     if [ "$task" == "help" ] ; then
-        abcli_show_usage "yolov5 train$ABCUL<object-name>|coco128$ABCUL[dryrun,epochs=10,gpu_count=2,size=$YOLOV5_MODEL_SIZES]" \
-            "train yolov5 on <object-name>|coco128."
+        abcli_show_usage "yolov5 train$ABCUL<object-name>|coco128$ABCUL[classes=<class-1+class-2>,dryrun,epochs=10,gpu_count=2,size=$YOLOV5_MODEL_SIZES]" \
+            "train yolov5."
 
         if [ "$(abcli_keyword_is $2 verbose)" == true ] ; then
             pushd $abcli_path_git/yolov5 > /dev/null
@@ -26,6 +26,12 @@ function yolov5_train() {
         abcli_select - ~trail
         yolov5_ingest coco128
         local dataset_name=$abcli_object_name
+
+        local classes=$(abcli_option "$optins" classes)
+        if [ ! -z "$classes" ] ; then
+            yolov5_dataset crop \
+                $(echo "$classes" | tr + ,)
+        fi
 
         abcli_select $current_object ~trail
 
