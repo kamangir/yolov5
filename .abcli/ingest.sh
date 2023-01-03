@@ -51,5 +51,5 @@ function yolov5_ingest() {
         return
     fi
 
-    abcli_error "-yolov5: ingest: $source: source not found."
+    abcli_log_error "-yolov5: ingest: $source: source not found."
 }

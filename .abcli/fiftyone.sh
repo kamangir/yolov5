@@ -24,5 +24,5 @@ function yolov5_fiftyone() {
         return
     fi
 
-    abcli_error "-yolov5: fiftyone: $type: type not found."
+    abcli_log_error "-yolov5: fiftyone: $type: type not found."
 }
