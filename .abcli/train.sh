@@ -40,8 +40,8 @@ function yolov5_train() {
         abcli_download object $dataset_name
     fi
 
-    local do_upload=$(abcli_option_int "$options" upload 1)
     local dryrun=$(abcli_option_int "$options" dryrun 0)
+    local do_upload=$(abcli_option_int "$options" upload $(abcli_not $dryrun))
     local epochs=$(abcli_option_int "$options" epochs 25)
     local gpu_count=$(abcli_option "$options" gpu_count -)
     local image_size=$(abcli_option_int "$options" image_size 640)
@@ -92,9 +92,9 @@ function yolov5_train() {
         pushd $abcli_path_git/yolov5 > /dev/null
         eval $command_line
         popd > /dev/null
+    fi
 
-        if [ "$do_upload" == 1 ] ; then
-            abcli_upload
-        fi
+    if [ "$do_upload" == 1 ] ; then
+        abcli_upload
     fi
 }
