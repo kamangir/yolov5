@@ -25,7 +25,7 @@ function yolov5() {
 
     local function_name="yolov5_$task"
     if [[ $(type -t $function_name) == "function" ]] ; then
-        $function_name ${@:2}
+        $function_name "${@:2}"
         return
     fi
 
